@@ -44,4 +44,39 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+
+    // Relations
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function connection(){
+        return $this->hasMany(Connection::class);
+    }
+
+    public function friends(){
+        return $this->belongsToMany(User::class, 'connections', 'user_id', 'friend_id')->wherePivot('status', 'accepted');
+    }
+
+    public function sentFriendRequests()
+    {
+        return $this->hasMany(Connection::class, 'user_id')->where('status', 'pending');
+    }
+
+    public function receivedFriendRequests(){
+        return $this->hasMany(Connection::class, 'friend_id')->where('status', 'pending');
+    }
 }
