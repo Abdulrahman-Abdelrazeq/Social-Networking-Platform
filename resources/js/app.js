@@ -1,4 +1,5 @@
 import './bootstrap';
+// Font Awesome
 
 import Alpine from 'alpinejs';
 

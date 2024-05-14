@@ -18,7 +18,7 @@ class ConnectionsTableSeeder extends Seeder
                 Connection::create([
                     'user_id' => $i,
                     'friend_id' => $j,
-                    'status' => 'accepted', // You can set the status as accepted for testing purposes
+                    'status' => 'accepted',
                 ]);
             }
         }

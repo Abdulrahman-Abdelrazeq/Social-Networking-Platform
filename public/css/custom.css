@@ -1,0 +1,59 @@
+:root{
+    --main-color : #1b1f23;
+}
+.new-post div textarea, .modal textarea {
+    flex: 1;
+    background-color: #2f363c;
+    color: white;
+    resize: none;
+    border-radius: 10px;
+    margin: 0;
+}
+.new-post div textarea:focus-within, .modal textarea:focus-within {
+    border: none !important;
+    background-color: #2f363c;
+    color: white;
+}
+.new-post div label, .modal-body .edit-image label{
+    cursor: pointer;
+    border: 1px solid rgb(28, 28, 28);
+    color: white !important;
+    padding: 10px;
+    background-color: #23282e;
+    border-radius: 6px;
+}
+.new-post div label:hover, .modal-body .edit-image label:hover{
+    color: #0a58ca !important;
+    transition: 0.2s;
+}
+.all-posts div, .login-register, .new-post div {
+    background-color: var(--main-color);
+}
+.all-posts div .info h4 a{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.all-posts div .info div:first-child {
+    flex: 1;
+}
+.all-posts div .edit:hover {
+    color: rgb(0, 94, 255);
+    transition: .3s;
+}
+.all-posts div .delete:hover {
+    color: red;
+    transition: .3s;
+}
+.all-posts .action a:hover {
+    color: #0a58ca;
+    transition: 0.2s;
+    cursor: pointer;
+}
+nav {
+    background-color: var(--main-color);
+    color: white !important;
+}
+nav x-nav-link{
+    color: white !important;
+}

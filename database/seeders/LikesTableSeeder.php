@@ -17,7 +17,7 @@ class LikesTableSeeder extends Seeder
         $posts = Post::all();
         foreach ($posts as $post) {
             $userIds = range(1, 10);
-            shuffle($userIds); // Shuffle user IDs for random likes
+            shuffle($userIds);
 
             foreach ($userIds as $index => $userId) {
                 if ($index < 3) { // Create 3 likes per post
