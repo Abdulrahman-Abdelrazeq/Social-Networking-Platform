@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -15,7 +17,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->get();
-        return view('home', compact('posts'));
+        $comments = Comment::orderBy('created_at', 'desc')->get();
+        return view('home', compact('posts'), compact('comments'));
     }
 
     /**
@@ -80,10 +83,9 @@ class PostController extends Controller
 
         // Validate the form data
         $request->validate([
-            'content' => '',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the file size and allowed formats as needed
+            'content' => 'required_without:image',
+            'image' => 'required_without:content|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the file size and allowed formats as needed
         ]);
-
         // Update the post content if provided
         $post->content = $request->input('content');
 
@@ -122,5 +124,37 @@ class PostController extends Controller
         $user = Auth::user();
         $posts = Post::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
         return view('profile', compact('posts'));
+    }
+
+    public function likedUsers($postId)
+    {
+        $likes = like::where('post_id', $postId)->with('user')->get();
+        // $likedUsers = $post->likes()->user()->get();
+        // dd($likedUsers);
+        return response()->json(['users' => $likes]);
+    }
+
+    public function like(Post $post)
+    {
+        $user = auth()->user();
+        if ($user) {
+            $like = Like::where('user_id', $user->id)
+                        ->where('post_id', $post->id)
+                        ->first();
+            if ($like) {
+                // Unlike the post if already liked
+                $like->delete();
+                $liked = false;
+            } else {
+                // Like the post if not already liked
+                $like = new Like();
+                $like->user_id = $user->id;
+                $like->post_id = $post->id;
+                $like->save();
+                $liked = true;
+            }
+            return response()->json(['success' => true, 'liked' => $liked]);
+        }
+        return response()->json(['success' => false, 'message' => 'Unauthorized'], 401);
     }
 }

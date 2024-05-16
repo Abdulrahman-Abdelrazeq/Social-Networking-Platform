@@ -72,11 +72,11 @@
                                                 <img src="{{ asset('storage/' . $post->image) }}" >
                                             </div>
                                             <div class="form-group edit-image mt-2">
-                                                <label for="edit-image">
+                                                <label for="edit-image{{$post->id}}">
                                                     <i class="fa-solid fa-image"></i>
                                                     Other image
                                                 </label>
-                                                <input class="d-none" type="file" name="image" id="edit-image">
+                                                <input class="d-none" type="file" name="image" id="edit-image{{$post->id}}">
                                             </div>
                                         </div>
                                         <div class="modal-footer">

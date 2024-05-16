@@ -1,7 +1,9 @@
 :root{
     --main-color : #1b1f23;
 }
-.new-post div textarea, .modal textarea {
+.new-post div textarea,
+.modal textarea,
+.new-comment div textarea {
     flex: 1;
     background-color: #2f363c;
     color: white;
@@ -9,12 +11,16 @@
     border-radius: 10px;
     margin: 0;
 }
-.new-post div textarea:focus-within, .modal textarea:focus-within {
+.new-post div textarea:focus-within,
+.modal textarea:focus-within,
+.new-comment div textarea:focus-within  {
     border: none !important;
     background-color: #2f363c;
     color: white;
 }
-.new-post div label, .modal-body .edit-image label{
+.new-post div label,
+.modal-body .edit-image label,
+.new-comment div label {
     cursor: pointer;
     border: 1px solid rgb(28, 28, 28);
     color: white !important;
@@ -22,11 +28,16 @@
     background-color: #23282e;
     border-radius: 6px;
 }
-.new-post div label:hover, .modal-body .edit-image label:hover{
+.new-post div label:hover,
+.modal-body .edit-image label:hover,
+.new-comment div label:hover {
     color: #0a58ca !important;
     transition: 0.2s;
 }
-.all-posts div, .login-register, .new-post div {
+.all-posts > div,
+.login-register,
+.new-post div,
+.modal .modal-content {
     background-color: var(--main-color);
 }
 .all-posts div .info h4 a{
@@ -45,7 +56,8 @@
     color: red;
     transition: .3s;
 }
-.all-posts .action a:hover {
+.all-posts .action a:hover,
+.all-posts .action .active {
     color: #0a58ca;
     transition: 0.2s;
     cursor: pointer;
