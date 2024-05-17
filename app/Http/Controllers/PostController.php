@@ -123,7 +123,8 @@ class PostController extends Controller
 
         $user = Auth::user();
         $posts = Post::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
-        return view('profile', compact('posts'));
+        $comments = Comment::orderBy('created_at', 'desc')->get();
+        return view('profile', compact('posts'), compact('comments'));
     }
 
     public function likedUsers($postId)

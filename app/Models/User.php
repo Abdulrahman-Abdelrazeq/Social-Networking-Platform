@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'bio',
     ];
 
     /**
@@ -71,12 +72,12 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'connections', 'user_id', 'friend_id')->wherePivot('status', 'accepted');
     }
 
-    public function sentFriendRequests()
-    {
-        return $this->hasMany(Connection::class, 'user_id')->where('status', 'pending');
-    }
+    // public function sentFriendRequests()
+    // {
+    //     return $this->hasMany(Connection::class, 'user_id')->where('status', 'pending');
+    // }
 
-    public function receivedFriendRequests(){
-        return $this->hasMany(Connection::class, 'friend_id')->where('status', 'pending');
-    }
+    // public function receivedFriendRequests(){
+    //     return $this->hasMany(Connection::class, 'friend_id')->where('status', 'pending');
+    // }
 }
